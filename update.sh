@@ -10,3 +10,5 @@ cp ~/.config/picom.conf ./picom.conf
 cp ~/.config/gtk-3.0/settings.ini ./settings.ini
 cp ~/.tmux.conf ./.tmux.conf
 cp ~/.zshrc ./.zshrc
+rm -r ./polybar
+cp -r ~/.config/polybar/forest ./polybar

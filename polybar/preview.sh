@@ -1,0 +1,1 @@
+/home/nhattan/OSsetup/polybar/forest/preview.sh
