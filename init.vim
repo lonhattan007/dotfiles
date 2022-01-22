@@ -1,5 +1,4 @@
-" This is my nvim configuration file
-" Located at ~/.config/nvim/
+" This is my Neovim configuration file
 
 
 " Vim-plug session
@@ -30,6 +29,9 @@ Plug 'junegunn/fzf.vim'
 " Vim autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Vim ANTLR
+Plug 'jrozner/vim-antlr'
+
 " Bracket colorizer
 Plug 'junegunn/rainbow_parentheses.vim' 
 
@@ -42,7 +44,7 @@ Plug 'alvan/vim-closetag'
 call plug#end()
 
 
-" Administrative settings
+" General settings
 set noswapfile
 
 " Enable text selecting with mouse
@@ -52,11 +54,16 @@ se mouse+=a
 set number
 set rnu
 
-" Mapping keys with Ctrl+C, Ctrl+X, Ctrl+V shortcuts
-" Required vim-gtk installed
+" Mapping keys with Ctrl+C, Ctrl+X and Ctrl+V shortcuts
 vmap <C-c> "+y<CR>
 vmap <C-x> "+x<CR>
 nmap <C-v> "+gP<CR>
+
+" Lock arrow keys
+nnoremap <Left> :echo "Use H!"<CR>
+nnoremap <Down> :echo "Use J!"<CR>
+nnoremap <Up> :echo "Use K!"<CR>
+nnoremap <Right> :echo "Use L!"<CR>
 
 
 " Set cursor
@@ -82,16 +89,6 @@ set shiftwidth=4
 set expandtab
 
 
-" Set colorscheme
-syntax enable
-autocmd VimEnter * ++nested colorscheme gruvbox
-
-" Dark gruvbox background
-set background=dark
-" Transparent background for gruvbox
-autocmd VimEnter * hi Normal ctermbg=none
-
-
 " Tab pages
 " Mapping key for moving between tabs
 nnoremap <C-left> :tabprevious<CR>
@@ -105,15 +102,26 @@ nnoremap <silent> <A-right> :tabm +1<CR>
 let notabs = 0
 nnoremap <silent> <F8> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 
-" Mapping key for opening tabs
+" Mapping key for opening and closing tabs
 nnoremap <C-t> :tabe<CR>
+nnoremap <C-q> :tab close<CR>
+
+
+" Set colorscheme
+syntax enable
+autocmd VimEnter * ++nested colorscheme nord
+
+" Dark gruvbox background
+set background=dark
+" Transparent background for gruvbox
+" autocmd VimEnter * hi Normal ctermbg=none
 
 
 " Airline styling
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#clock#format = '%H:%M'
-let g:airline_theme = 'bubblegum'
+let g:airline_theme =  'bubblegum'
 
 " Set powerline symbols
 if !exists('g:airline_symbols')
@@ -164,7 +172,7 @@ nmap <C-k> :Goyo<CR>
 function! s:goyo_enter()
     set number
     set rnu
-    hi Normal ctermbg=none
+    " hi Normal ctermbg=none
 
     Limelight
 
@@ -175,7 +183,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-    hi Normal ctermbg=none
+    " hi Normal ctermbg=none
     
     Limelight!
 
@@ -216,7 +224,6 @@ let g:coc_global_extensions = [
     \ 'coc-yaml',
     \ 'coc-clangd',
     \ 'coc-python',
-    \ 'coc-java',
     \ 'coc-flutter',
     \ 'coc-sql',
     \ 'coc-cmake',
