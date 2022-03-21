@@ -138,9 +138,6 @@ export PATH="$PATH:/usr/local/lib/flutter/bin"
 # Python 3
 alias python='/usr/bin/python3'
 
-# Spicetify
-alias spicetify='~/spicetify-cli/spicetify'
-
 # pipes
 alias pipes='pipes.sh'
 
@@ -162,4 +159,34 @@ alias datagrip='/home/nhattan/.local/share/JetBrains/Toolbox/apps/datagrip/ch-0/
 # nvim config
 alias nvim-config='nvim ~/.config/nvim/init.vim'
 
+# postman
+alias postman='flatpak run com.getpostman.Postman'
+
+# insomnia
+alias insomnia='flatpak run rest.insomnia.Insomnia'
+
+# only office
+alias onlyoffice='flatpak run org.onlyoffice.desktopeditors'
+
+# matrix
+alias matrix='reset && cmatrix'
+
+# cbonsai on dashboard
+alias bonsai='cbonsai -li -L 19'
+
+# tty-clock on dashboard
+alias clock='tty-clock -cD'
+
+# Spotify TUI
+alias spt='~/.cargo/bin/spt'
+
+# spotifyd
+alias spotifyd='~/spotifyd/target/release/spotifyd'
+
+# ncmpcpp
+alias ncmpcpp='/usr/local/bin/ncmpcpp'
+
+# Node-oracle
+export LD_LIBRARY_PATH="/opt/oracle/instantclient_21_5:$LD_LIBRARY_PATH"
+#export PATH=$PATH:$LD_LIBRARY_PATH
 

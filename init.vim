@@ -114,7 +114,7 @@ autocmd VimEnter * ++nested colorscheme nord
 " Dark gruvbox background
 set background=dark
 " Transparent background for gruvbox
-" autocmd VimEnter * hi Normal ctermbg=none
+autocmd VimEnter * hi Normal ctermbg=none
 
 
 " Airline styling
@@ -146,7 +146,7 @@ let g:airline_symbols.colnr=' col:'
 let g:NERDTreeWinPos = "right"
 
 " Mapping keys for NERDTree toggling
-nmap <F6> :NERDTreeToggle<CR>
+nmap <C-b> :NERDTreeToggle<CR>
 
 
 " Bracket colorizer
