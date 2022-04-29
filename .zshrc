@@ -153,6 +153,8 @@ alias layout_manager='~/i3-layout-manager/layout_manager.sh'
 # Jetbrains
 # Android Studio
 alias android_studio='/home/nhattan/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/203.7935034/bin/studio.sh'
+# Android Studio Emulator
+alias emulator='/home/nhattan/Android/Sdk/emulator/emulator'
 # DataGrip
 alias datagrip='/home/nhattan/.local/share/JetBrains/Toolbox/apps/datagrip/ch-0/213.5744.178/bin/datagrip.sh'
 
