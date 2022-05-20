@@ -8,6 +8,7 @@ cp ~/.config/i3/config ./i3-gaps.config
 cp ~/.config/nvim/init.vim ./init.vim
 cp ~/.config/picom.conf ./picom.conf
 cp ~/.config/gtk-3.0/settings.ini ./settings.ini
+cp ~/.vimrc ./vimrc
 cp ~/.tmux.conf ./.tmux.conf
 cp ~/.zshrc ./.zshrc
 
