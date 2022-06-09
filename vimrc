@@ -1,4 +1,4 @@
-" This is my Neovim configuration file
+" This is my vim configuration file
 
 
 " Vim-plug session
@@ -7,6 +7,8 @@ call plug#begin('~/.vim/plugged')
 " Colorscheme
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next' " OceanicNext
+Plug 'tomasiser/vim-code-dark' " codedark
 
 " Vim NERDTree
 Plug 'preservim/nerdtree'
@@ -21,9 +23,6 @@ Plug 'junegunn/goyo.vim'
 
 " Vim limelight
 Plug 'junegunn/limelight.vim'
-
-" Vim terminal
-Plug 'akinsho/toggleterm.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -60,7 +59,7 @@ Plug 'natebosch/dartlang-snippets'
 call plug#end()
 
 
-" General settings
+" Administrative settings
 set noswapfile
 
 " Enable text selecting with mouse
@@ -70,16 +69,20 @@ se mouse+=a
 set number
 set rnu
 
-" Mapping keys with Ctrl+C, Ctrl+X and Ctrl+V shortcuts
+" Set split below
+set splitbelow
+
+" Set terminal size
+set termwinsize=10x0
+
+" Map Ctrl+J to open terminal
+nnoremap <silent> <C-j> :bo term<CR>
+
+" Mapping keys with Ctrl+C, Ctrl+X, Ctrl+V shortcuts
+" Required vim-gtk installed
 vmap <C-c> "+y<CR>
 vmap <C-x> "+x<CR>
 nmap <C-v> "+gP<CR>
-
-" Lock arrow keys
-nnoremap <Left> :echo "Use H!"<CR>
-nnoremap <Down> :echo "Use J!"<CR>
-nnoremap <Up> :echo "Use K!"<CR>
-nnoremap <Right> :echo "Use L!"<CR>
 
 
 " Set cursor
@@ -105,44 +108,52 @@ set shiftwidth=4
 set expandtab
 
 
+" Set colorscheme
+syntax enable
+
+"if (has("termguicolors"))
+"   set termguicolors
+"endif
+
+autocmd VimEnter * ++nested colorscheme nord
+
+" Dark gruvbox background
+set background=dark
+" Transparent background for some color schemes
+autocmd VimEnter * hi Normal ctermbg=none
+
+
 " Tab pages
 " Mapping key for moving between tabs
-nnoremap <C-left> :tabprevious<CR>
-nnoremap <C-right> :tabnext<CR>
+nnoremap <silent> <C-left> :tabprevious<CR>
+nnoremap <silent> <C-right> :tabnext<CR>
+inoremap <silent> <C-left> <Esc>:tabprevious<CR>
+inoremap <silent> <C-right> <Esc>:tabnext<CR>
 
 " Mapping key for moving current tab position
 nnoremap <silent> <A-left> :tabm -1<CR>
 nnoremap <silent> <A-right> :tabm +1<CR>
+inoremap <silent> <A-left> <Esc>:tabm -1<CR>
+inoremap <silent> <A-right> <Esc>:tabm +1<CR>
 
 " Mapping key for tab focus toggling
 let notabs = 0
-nnoremap <silent> <C-S-o> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
+nnoremap <silent> <C-o> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<Bar>:tab ball<Bar>:tabn<Bar>:endif<CR>
 
-" Mapping key for opening and closing tabs
-nnoremap <C-t> :tabe<CR>
-nnoremap <C-w> :tab close<CR>
-
-
-" Set colorscheme
-syntax enable
-autocmd VimEnter * ++nested colorscheme gruvbox
-
-" Dark gruvbox background
-set background=dark
-" Transparent background for gruvbox
-autocmd VimEnter * hi Normal ctermbg=none
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+" Mapping key for opening tabs
+noremap <silent> <C-t> :tabnew<CR>
+inoremap <silent> <C-t> <Esc>:tabe<CR>
 
 
 " Airline styling
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#clock#format = '%H:%M'
-let g:airline_theme =  'bubblegum'
+let g:airline_theme = 'bubblegum'
 
 " Set powerline symbols
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+   let g:airline_symbols = {}
 endif
 
 " powerline symbols
@@ -159,11 +170,8 @@ let g:airline_symbols.colnr=' col:'
 
 
 " NERDTree
-" Position
 let g:NERDTreeWinPos = "right"
-" Mapping keys for NERDTree toggling
-nmap <C-b> :NERDTreeToggle<CR>
-" Git status
+nmap <silent> <C-b> :NERDTreeToggle<CR>
 let g:NERDTreeGitStatusWithFlags = 1
 
 
@@ -179,18 +187,18 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_paragraph_span = 0
 
 " Mapping keys for Limelight toggle
-nmap <C-l> :Limelight!!<CR>
+nmap <silent> <C-l> :Limelight!!<CR>
 
 
 " Goyo zen mode
 " Mapping keys for Goyo toggling
-nmap <C-k> :Goyo<CR>
+nmap <silent> <C-k> :Goyo<CR>
 
 " Limelight integration
 function! s:goyo_enter()
     set number
     set rnu
-    " hi Normal ctermbg=none
+    hi Normal ctermbg=none
 
     Limelight
 
@@ -201,7 +209,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-    " hi Normal ctermbg=none
+    hi Normal ctermbg=none
     
     Limelight!
 
@@ -219,13 +227,9 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 
-" Toggleterm 
-
-
 " FZF
 " Mapping keys for fzf toggling
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-S-f> :FZF<CR>
 
 " Find files in project
 set wildmode=list:longest,list:full
@@ -233,29 +237,20 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path '**/node_modules/**' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 
-" Snippets
-let g:UltiSnipsExpandTrigger = '<Nop>'
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-
-
 " COC
-" Node path
-let g:coc_node_path = "/home/nhattan/.nvm/versions/node/v12.12.0/bin/node"
-
 " Coc extensions
 let g:coc_global_extensions = [
     \ 'coc-highlight',
-    \ 'coc-snippets',
     \ 'coc-json',
     \ 'coc-html',
-    \ 'coc-emmet',
     \ 'coc-css',
+    \ 'coc-flutter',
     \ 'coc-eslint',
     \ 'coc-tsserver',
     \ 'coc-yaml',
     \ 'coc-clangd',
     \ 'coc-python',
+    \ 'coc-java',
     \ 'coc-flutter',
     \ 'coc-sql',
     \ 'coc-cmake',
@@ -269,11 +264,10 @@ let g:dart_format_on_save = 1
 let g:dart_trailing_comma_indent = v:true
 let g:dartfmt_options = ['--fix', '--line-length 120']
 
-" Typescrips
-au BufNewFile,BufRead *.ts setlocal filetype=typescript
-au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
-" ANTLR4
-au BufRead,BufNewFile *.g4 set filetype=antlr4
+
+
+
+
 
 

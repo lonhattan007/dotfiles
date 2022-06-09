@@ -107,7 +107,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+
+# Zsh auto-suggestion
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -128,12 +131,15 @@ export NVM_DIR="$HOME/.nvm"
 # wal -Rnq
 
 # ANTLR4
-export ANTLR_JAR="/usr/local/lib/antlr-4.9-complete.jar"                    
-alias antlr4='java -Xmx500M -cp "usr/local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.Tool'                                                    
-alias grun='java -Xmx500M -cp "usr/local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.gui.TestRig'                                               
+export ANTLR_JAR="/home/nhattan/.local/lib/antlr-4.9-complete.jar"                    
+alias antlr4='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.Tool'                                                    
+alias grun='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.gui.TestRig'                                               
+export CLASSPATH=".:/home/nhattan/.local/lib/antlr-4.9-complete.jar":$CLASSPATH
 
 # Flutter                                                                   
 export PATH="$PATH:/usr/local/lib/flutter/bin"
+# Dart pub
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # Python 3
 alias python='/usr/bin/python3'
@@ -162,7 +168,8 @@ export PATH="$PATH:/home/nhattan/Android/Sdk/platform-tools"
 # DataGrip
 alias datagrip='/home/nhattan/.local/share/JetBrains/Toolbox/apps/datagrip/ch-0/213.5744.178/bin/datagrip.sh'
 
-# nvim config
+# nvim 
+alias vim='nvim'
 alias nvim-config='nvim ~/.config/nvim/init.vim'
 
 # postman
