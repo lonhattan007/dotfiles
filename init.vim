@@ -45,6 +45,9 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'akinsho/flutter-tools.nvim'
 
+" Python
+Plug 'davidhalter/jedi-vim'
+
 " Typescript
 Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
@@ -99,17 +102,13 @@ let &t_EI="\e[2 q"
 
 " 4-space tabbing
 " Set tab width
-filetype plugin indent on
+" filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
-set expandtab
+" set expandtab
 
 
 " Tab pages
-" Mapping key for moving between tabs
-nnoremap <C-left> :tabprevious<CR>
-nnoremap <C-right> :tabnext<CR>
-
 " Mapping key for moving current tab position
 nnoremap <silent> <A-left> :tabm -1<CR>
 nnoremap <silent> <A-right> :tabm +1<CR>
@@ -132,6 +131,9 @@ set background=dark
 " Transparent background for gruvbox
 autocmd VimEnter * hi Normal ctermbg=none
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" Turn off highlight
+nnoremap <C-h> :nohl<CR>
 
 
 " Airline styling
@@ -241,7 +243,7 @@ let g:coc_snippet_prev = '<S-TAB>'
 
 " COC
 " Node path
-let g:coc_node_path = "/home/nhattan/.nvm/versions/node/v12.12.0/bin/node"
+let g:coc_node_path = "/home/nhattan/.nvm/versions/node/v14.19.0/bin/node"
 
 " Coc extensions
 let g:coc_global_extensions = [
@@ -255,8 +257,8 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-yaml',
     \ 'coc-clangd',
-    \ 'coc-python',
     \ 'coc-flutter',
+    \ 'coc-pyright',
     \ 'coc-sql',
     \ 'coc-cmake',
     \ 'coc-markdownlint',
@@ -268,8 +270,23 @@ let g:coc_global_extensions = [
 let g:dart_format_on_save = 1
 let g:dart_trailing_comma_indent = v:true
 let g:dartfmt_options = ['--fix', '--line-length 120']
+"au BufNewFile,BufRead *.dart
+"    \ set tabstop=2 |
+"    \ set softtabstop=2 noexpandtab |
+"    \ set shiftwidth=2 |
+"    \ set autoindent |
+"    \ set fileformat=unix
 
-" Typescrips
+" Python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=0 noexpandtab |
+    \ set shiftwidth=4 |
+    \ set autoindent |
+    \ set fileformat=unix
+let NERDTreeIgnore=['\.pyc$', '\~$']
+
+" Typescripts
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 

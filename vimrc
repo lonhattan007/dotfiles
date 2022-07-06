@@ -124,11 +124,6 @@ autocmd VimEnter * hi Normal ctermbg=none
 
 
 " Tab pages
-" Mapping key for moving between tabs
-nnoremap <silent> <C-left> :tabprevious<CR>
-nnoremap <silent> <C-right> :tabnext<CR>
-inoremap <silent> <C-left> <Esc>:tabprevious<CR>
-inoremap <silent> <C-right> <Esc>:tabnext<CR>
 
 " Mapping key for moving current tab position
 nnoremap <silent> <A-left> :tabm -1<CR>

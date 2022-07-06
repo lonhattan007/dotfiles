@@ -132,14 +132,19 @@ export NVM_DIR="$HOME/.nvm"
 
 # ANTLR4
 export ANTLR_JAR="/home/nhattan/.local/lib/antlr-4.9-complete.jar"                    
-alias antlr4='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.Tool'                                                    
-alias grun='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.gui.TestRig'                                               
+#alias antlr4='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.Tool'                                                    
+#alias grun='java -Xmx500M -cp "/home/nhattan/.local/lib/antlr-4.9-complete.jar:$ANTLR_JAR" org.antlr.v4.gui.TestRig'                                               
 export CLASSPATH=".:/home/nhattan/.local/lib/antlr-4.9-complete.jar":$CLASSPATH
+alias antlr4='java -jar /usr/local/lib/antlr-4.9-complete.jar'
+alias grun='java org.antlr.v4.gui.TestRig'
 
 # Flutter                                                                   
 export PATH="$PATH:/usr/local/lib/flutter/bin"
 # Dart pub
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# Cargo
+export PATH="$PATH:/home/nhattan/.cargo/bin"
 
 # Python 3
 alias python='/usr/bin/python3'
@@ -154,7 +159,7 @@ alias gotop='~/.local/bin/gotop'
 alias polybar-launch='~/.config/polybar/launch.sh'
 
 # Layout manager
-alias layout_manager='~/i3-layout-manager/layout_manager.sh'
+alias layout_manager='~/.config/i3/layout_manager.sh'
 
 # Jetbrains
 # Android Studio
@@ -190,15 +195,10 @@ alias bonsai='cbonsai -li -L 19'
 # tty-clock on dashboard
 alias clock='tty-clock -cD'
 
-# Spotify TUI
-alias spt='~/.cargo/bin/spt'
-
-# spotifyd
-alias spotifyd='~/spotifyd/target/release/spotifyd'
-
 # ncmpcpp
 alias ncmpcpp='/usr/local/bin/ncmpcpp'
 
 # Node-oracle
 export LD_LIBRARY_PATH="/opt/oracle/instantclient_21_5:$LD_LIBRARY_PATH"
+
 
