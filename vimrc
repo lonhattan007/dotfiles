@@ -5,23 +5,22 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorscheme
-Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
-Plug 'mhartington/oceanic-next' " OceanicNext
-Plug 'tomasiser/vim-code-dark' " codedark
 
 " Vim NERDTree
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Vim airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'enricobacis/vim-airline-clock'
 
-" Vim zen mode
-Plug 'junegunn/goyo.vim'
+" Vim icons
+Plug 'ryanoasis/vim-devicons'
 
-" Vim limelight
+" Vim zen mode and focus lighting
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " Git
@@ -61,6 +60,8 @@ call plug#end()
 
 " Administrative settings
 set noswapfile
+set encoding=UTF-8
+let mapleader="\\"
 
 " Enable text selecting with mouse
 se mouse+=a
@@ -111,10 +112,6 @@ set expandtab
 " Set colorscheme
 syntax enable
 
-"if (has("termguicolors"))
-"   set termguicolors
-"endif
-
 autocmd VimEnter * ++nested colorscheme nord
 
 " Dark gruvbox background
@@ -139,11 +136,20 @@ nnoremap <silent> <C-o> :let notabs=!notabs<Bar>:if notabs<Bar>:tabo<Bar>:else<B
 noremap <silent> <C-t> :tabnew<CR>
 inoremap <silent> <C-t> <Esc>:tabe<CR>
 
+" Mapping shortcutss for plugin managers commands 
+cabbrev PI PlugInstall
+cabbrev PU PlugUpdate
+cabbrev PC PlugClean
+cabbrev CI CocInstall
+cabbrev CU CocUpdate
+
 
 " Airline styling
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#clock#format = '%H:%M'
+" Available options: bubblegum, seagull, nord_minimal, lucius
+" Default set to lucius because it follows the overall colorscheme
 let g:airline_theme = 'bubblegum'
 
 " Set powerline symbols
@@ -167,13 +173,11 @@ let g:airline_symbols.colnr=' col:'
 " NERDTree
 let g:NERDTreeWinPos = "right"
 nmap <silent> <C-b> :NERDTreeToggle<CR>
-let g:NERDTreeGitStatusWithFlags = 1
-
-
-" Bracket colorizer
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-autocmd FileType * RainbowParentheses
+" Open the existing NERDTree on each new tab.
+"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+" Mapping keys for NERDTree toggling
+nmap <silent> <leader>b :NERDTreeToggle<CR>
+imap <silent> <leader>b <Esc>:NERDTreeToggle<CR>
 
 
 " Limelight
@@ -259,10 +263,23 @@ let g:dart_format_on_save = 1
 let g:dart_trailing_comma_indent = v:true
 let g:dartfmt_options = ['--fix', '--line-length 120']
 
+" Typescripts
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+
+" ANTLR4
+au BufNewFile,BufRead *.g4 set filetype=antlr4
 
 
+" Auto close tags
+let g:closetag_filetypes = 'html,xhtml,phtml,xml'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+let g:closetag_enable_react_fragment = 1
 
 
-
+" Bracket colorizer
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+autocmd FileType * RainbowParentheses
 
 
